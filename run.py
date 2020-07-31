@@ -4,12 +4,12 @@ from flask import Flask, redirect, render_template, request, session, url_for
 
 
 app = Flask(__name__)
-
+app.secret_key = "randomstring123"
 messages = []
 
 
 def add_message(username, message):
-    """Add messages to the `messages` list """
+    """Add messages to the `messages` list"""
     now = datetime.now().strftime("%H:%M:%S")
     messages.append({"timestamp": now, "from": username, "message": message})
 
@@ -31,7 +31,7 @@ def user(username):
     """Add and display chat messages"""
     if request.method == "POST":
         username = session["username"]
-        message = request.form["message"]
+        message = request.form["message"]hg
         add_message(username, message)
         return redirect(url_for("user", username=session["username"]))
 
